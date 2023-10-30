@@ -1,0 +1,11 @@
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\ShoppingModelLibrary\bin\Debug\net6.0\ShoppingModelLibrary.deps.json
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\ShoppingModelLibrary\bin\Debug\net6.0\ShoppingModelLibrary.dll
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\ShoppingModelLibrary\bin\Debug\net6.0\ShoppingModelLibrary.pdb
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\ShoppingModelLibrary\obj\Debug\net6.0\ShoppingModelLibrary.GeneratedMSBuildEditorConfig.editorconfig
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\ShoppingModelLibrary\obj\Debug\net6.0\ShoppingModelLibrary.AssemblyInfoInputs.cache
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\ShoppingModelLibrary\obj\Debug\net6.0\ShoppingModelLibrary.AssemblyInfo.cs
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\ShoppingModelLibrary\obj\Debug\net6.0\ShoppingModelLibrary.csproj.CoreCompileInputs.cache
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\ShoppingModelLibrary\obj\Debug\net6.0\ShoppingModelLibrary.dll
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\ShoppingModelLibrary\obj\Debug\net6.0\refint\ShoppingModelLibrary.dll
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\ShoppingModelLibrary\obj\Debug\net6.0\ShoppingModelLibrary.pdb
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\ShoppingModelLibrary\obj\Debug\net6.0\ref\ShoppingModelLibrary.dll

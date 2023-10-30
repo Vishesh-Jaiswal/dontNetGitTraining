@@ -1,0 +1,11 @@
+D:\Hexaware FSD\Day3_Assignment\ClinicSolution\ClinicModelLibrary\bin\Debug\net6.0\ClinicModelLibrary.deps.json
+D:\Hexaware FSD\Day3_Assignment\ClinicSolution\ClinicModelLibrary\bin\Debug\net6.0\ClinicModelLibrary.dll
+D:\Hexaware FSD\Day3_Assignment\ClinicSolution\ClinicModelLibrary\bin\Debug\net6.0\ClinicModelLibrary.pdb
+D:\Hexaware FSD\Day3_Assignment\ClinicSolution\ClinicModelLibrary\obj\Debug\net6.0\ClinicModelLibrary.GeneratedMSBuildEditorConfig.editorconfig
+D:\Hexaware FSD\Day3_Assignment\ClinicSolution\ClinicModelLibrary\obj\Debug\net6.0\ClinicModelLibrary.AssemblyInfoInputs.cache
+D:\Hexaware FSD\Day3_Assignment\ClinicSolution\ClinicModelLibrary\obj\Debug\net6.0\ClinicModelLibrary.AssemblyInfo.cs
+D:\Hexaware FSD\Day3_Assignment\ClinicSolution\ClinicModelLibrary\obj\Debug\net6.0\ClinicModelLibrary.csproj.CoreCompileInputs.cache
+D:\Hexaware FSD\Day3_Assignment\ClinicSolution\ClinicModelLibrary\obj\Debug\net6.0\ClinicModelLibrary.dll
+D:\Hexaware FSD\Day3_Assignment\ClinicSolution\ClinicModelLibrary\obj\Debug\net6.0\refint\ClinicModelLibrary.dll
+D:\Hexaware FSD\Day3_Assignment\ClinicSolution\ClinicModelLibrary\obj\Debug\net6.0\ClinicModelLibrary.pdb
+D:\Hexaware FSD\Day3_Assignment\ClinicSolution\ClinicModelLibrary\obj\Debug\net6.0\ref\ClinicModelLibrary.dll

@@ -1,0 +1,14 @@
+D:\Hexaware FSD\New\NewSolution\NewApp\bin\Debug\net6.0\NewApp.exe
+D:\Hexaware FSD\New\NewSolution\NewApp\bin\Debug\net6.0\NewApp.deps.json
+D:\Hexaware FSD\New\NewSolution\NewApp\bin\Debug\net6.0\NewApp.runtimeconfig.json
+D:\Hexaware FSD\New\NewSolution\NewApp\bin\Debug\net6.0\NewApp.dll
+D:\Hexaware FSD\New\NewSolution\NewApp\bin\Debug\net6.0\NewApp.pdb
+D:\Hexaware FSD\New\NewSolution\NewApp\obj\Debug\net6.0\NewApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\Hexaware FSD\New\NewSolution\NewApp\obj\Debug\net6.0\NewApp.AssemblyInfoInputs.cache
+D:\Hexaware FSD\New\NewSolution\NewApp\obj\Debug\net6.0\NewApp.AssemblyInfo.cs
+D:\Hexaware FSD\New\NewSolution\NewApp\obj\Debug\net6.0\NewApp.csproj.CoreCompileInputs.cache
+D:\Hexaware FSD\New\NewSolution\NewApp\obj\Debug\net6.0\NewApp.dll
+D:\Hexaware FSD\New\NewSolution\NewApp\obj\Debug\net6.0\refint\NewApp.dll
+D:\Hexaware FSD\New\NewSolution\NewApp\obj\Debug\net6.0\NewApp.pdb
+D:\Hexaware FSD\New\NewSolution\NewApp\obj\Debug\net6.0\NewApp.genruntimeconfig.cache
+D:\Hexaware FSD\New\NewSolution\NewApp\obj\Debug\net6.0\ref\NewApp.dll
