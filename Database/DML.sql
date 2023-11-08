@@ -40,3 +40,35 @@ delete from Skills where skill='C'
 --!delete from chiled to delete from parent
 delete from EmployeesSkills where skill_name='C'
 delete from Skills where skill ='C'
+
+
+use dbCompany26Oct2023
+
+select * from EmployeesSkills
+
+create trigger trgInsertEmployeeSkill
+on EmployeesSkills
+instead of insert
+as
+begin
+   declare 
+	 @skillName varchar(20),
+	 @empId int,
+	 @level int
+	 set @SkillName = (select skill_name from inserted)
+	 set @empId =  (select employee_id from inserted)
+	 set @level =  (select skill_level from inserted)
+	 if((select count(skill) from Skills where skill= @skillName) =0)
+	 begin
+			print 'Skill not present in skill table'
+	end
+	else
+	begin
+	    insert into EmployeesSkills values(@empId,@skillName,@level)	
+	end
+end
+
+insert into EmployeesSkills values(101,'SQ',8)
+insert into EmployeesSkills values(101,'SQL',8)
+
+select * from EmployeesSkills

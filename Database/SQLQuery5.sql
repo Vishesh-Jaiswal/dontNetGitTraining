@@ -186,3 +186,265 @@ select * from tbl1
 
 DROP PROCEDURE dbo.proc_InsertSample 
 GO
+
+create proc proc_Select(@f2 varchar(20))
+as
+begin
+   select * from tbl1 where f2=@f2
+end
+
+exec proc_Select 'abc;delete from tbl1'
+exec proc_Select 'abc'
+
+create proc proc_GetTotalSaleAmount(@authorName varchar(20),@salemount float out)
+as
+begin
+   declare
+    @saleamt float
+	set @saleamt = (select sum(s.qty) * sum(t.price) from sales s join titles t 
+						on s.title_id=t.title_id
+						where t.title_id in
+						(select title_id from titleauthor where au_id= 
+						(select au_id from authors where au_fname = @authorName)))
+	set @salemount = @saleamt
+end
+
+
+select * from authors
+
+declare @amt float
+begin
+exec proc_GetTotalSaleAmount 'Cheryl',@amt out
+print @amt
+end
+
+
+create function fn_CalculateTax(@price float)
+returns float
+as
+begin
+    declare @totalPrice float
+	set @totalPrice = @price +(@price*12.36/100)
+	return round(@totalPrice,2)
+end
+
+select title,price,dbo.fn_CalculateTax(price) 'Nett. Price'
+from titles
+
+
+--create a function that will take the author's first name and last name and 
+--give back the full name separated by space
+create function full_Name(@au_fname varchar(20),@au_lname varchar(40))
+returns varchar(40)
+as
+begin
+	declare @fullName varchar(40)
+	set @fullName	= @au_fname+' '+@au_lname
+	return @fullName
+end
+
+select au_fname,au_lname,dbo.full_Name(au_fname,au_lname) 'Author Full Name' from authors
+
+
+--create a procedure that will take the publisher name and give back the total sale 
+--for the books published
+create proc total_sales(@pubName varchar(40))
+as
+begin
+    select (sum(s.qty)*sum(t.price)) as 'sales'from sales s join titles t
+	on s.title_id=t.title_id join publishers p on p.pub_id=t.pub_id
+end
+
+exec total_sales 'New Moon Books'
+
+
+
+--VIew
+create view vwPublisher
+as
+select pub_id 'Publisher Id', pub_name 'Publisher Name'  from Publishers
+
+select * from vwPublisher
+
+create view vwInvoice
+as
+ select t.title 'Book Name', sum(s.qty)*sum(t.price) 'Sale Amount' from sales s join titles t
+                    on s.title_id=t.title_id
+					group by t.title 
+
+select * from vwInvoice
+
+create index idxSample on tbl1(f1)
+
+sp_help tbl1
+
+create trigger trg_InsertTbl1
+on tbl1
+for insert
+as
+begin
+   print 'Hello'
+end
+
+insert into tbl1 values(101,'UUU')
+
+select * from tbl1
+
+
+select * from authors
+select * from sales
+select * from stores
+select * from titles
+select * from publishers
+select * from titleauthor
+select * from pub_info
+
+select stor_name 'Store Name',title 'Book',qty 'Quanity',(ytd_sales*price) as 'Sale Amount',
+pub_name 'Publisher name',au_fname+' '+au_lname 'Author Name'
+from stores s join sales sa on s.stor_id=sa.stor_id right outer join titles t
+on t.title_id=sa.title_id
+join publishers p on t.pub_id=p.pub_id join titleauthor ta on ta.title_id=t.title_id
+right outer join authors a on a.au_id=ta.au_id
+
+drop proc total_auth_sales
+
+create proc total_auth_sales(@pubName varchar(40))
+as
+begin
+    select au_fname+' '+au_lname as Author,(sum(s.qty)*t.price) as 'sales'from sales s join titleauthor ta 
+	on s.title_id=ta.title_id join authors a on a.au_id=ta.au_id join titles t on
+	s.title_id=t.title_id group by Author
+end
+
+exec total_sales 'New Moon Books'
+
+create proc name_Look()
+
+select sa.stor_id,stor_name,t.title,ord_num,ord_date,sum(qty)>max,payterms from sales sa join stores st on
+sa.stor_id=st.stor_id join titles t on t.title_id=sa.title_id group by
+sa.stor_id,stor_name,t.title,ord_num,ord_date,qty,payterms having max(qty)<sum(qty)
+
+SELECT
+    s.stor_id AS 'Store ID',
+    s.title_id AS 'Title ID',
+    t.title AS 'Title',
+    s.qty AS 'Sale Quantity',
+    s.ord_date AS 'Sale Date'
+FROM sales s
+left JOIN (
+    SELECT
+        s.stor_id,
+        s.title_id,
+        MAX(s.qty) AS max_qty
+    FROM sales s
+    GROUP BY s.stor_id, s.title_id
+) max_sale_qty ON s.stor_id = max_sale_qty.stor_id
+    AND s.title_id = max_sale_qty.title_id
+    AND s.qty > max_sale_qty.max_qty
+JOIN titles t ON s.title_id = t.title_id;
+
+select concat(au_fname,' ',au_lname) as AuthorName, title 'Book' ,avg(price) 'Average Price' from
+authors a join titleauthor ta on a.au_id=ta.au_id join titles t on t.title_id=ta.title_id
+group by concat(au_fname,' ',au_lname),title
+
+sp_help titles
+
+select title 'Titles' from titles where title like '%e%' and title like '%a%'
+
+--6
+create procedure proc_CountBooks (@Price decimal(10, 2))
+as
+begin
+    select count(*) 'No. of Books' from titles where price < @Price
+END
+
+EXEC proc_CountBooks 20
+
+create 
+
+create PROCEDURE get_total_sales_by_author (@author_name VARCHAR(60))
+AS
+BEGIN
+DECLARE @total_sales DECIMAL(10,2);
+SET @total_sales = (SELECT sum(s.qty )* sum(t.price)  FROM sales s
+INNER JOIN titles t ON s.title_id = t.title_id
+INNER JOIN titleauthor ta ON t.title_id = ta.title_id
+INNER JOIN authors a ON ta.au_id = a.au_id
+WHERE a.au_fname + ' ' + a.au_lname = @author_name)
+IF @total_sales IS NULL OR @total_sales = 0
+BEGIN
+PRINT 'Sale yet to gear up';
+END
+ELSE
+BEGIN
+PRINT 'The total sales amount for ' + @author_name + ' is ' + CAST(@total_sales AS VARCHAR);
+END;
+END;
+
+EXEC get_total_sales_by_author @author_name = 'Green Marjorie';
+select * from authors
+
+alter TRIGGER trgPreventPriceUpdate
+ON titles
+FOR UPDATE
+AS
+BEGIN
+    IF UPDATE(price) AND EXISTS (SELECT 1 FROM inserted WHERE price > 3000)
+    BEGIN
+        ROLLBACK;
+        PRINT 'Price update is not allowed for prices below 7.';
+    END
+END;
+select * from titles
+where price<7
+update titles set price=9000 where title_id='BU1111'
+
+drop trigger trgPriceUpdate
+
+SELECT  
+    name,
+    is_instead_of_trigger
+FROM 
+    sys.triggers  
+WHERE 
+    type = 'TR'
+
+create PROCEDURE total_sales_author (@author_name VARCHAR(60))
+AS
+BEGIN
+DECLARE @total_sales DECIMAL(10,2);
+SET @total_sales = (SELECT sum(s.qty )* sum(t.price)  FROM sales s
+INNER JOIN titles t ON s.title_id = t.title_id
+INNER JOIN titleauthor ta ON t.title_id = ta.title_id
+INNER JOIN authors a ON ta.au_id = a.au_id
+WHERE a.au_fname + ' ' + a.au_lname = @author_name)
+IF @total_sales IS NULL OR @total_sales = 0
+BEGIN
+PRINT 'Sale yet to gear up';
+END
+ELSE
+BEGIN
+PRINT 'The total sales amount for ' + @author_name + ' is ' + CAST(@total_sales AS VARCHAR);
+END;
+END;
+
+EXEC total_sales_author @author_name = 'Green Marjorie';
+
+SELECT
+    s.stor_id AS 'Store ID',
+    s.title_id AS 'Title ID',
+    t.title AS 'Title',
+    s.qty AS 'Sale Quantity',
+    s.ord_date AS 'Sale Date'
+FROM sales s
+left JOIN (
+    SELECT
+        s.stor_id,
+        s.title_id,
+        MAX(s.qty) AS max_qty
+    FROM sales s
+    GROUP BY s.stor_id, s.title_id
+) max_sale_qty ON s.stor_id = max_sale_qty.stor_id
+    AND s.title_id = max_sale_qty.title_id
+    AND s.qty > max_sale_qty.max_qty
+JOIN titles t ON s.title_id = t.title_id;

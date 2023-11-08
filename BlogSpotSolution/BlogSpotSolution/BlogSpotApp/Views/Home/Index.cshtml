@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Blog Web App</h1>
+    <p>Express Your Thoughts</p>
+    @if (TempData.ContainsKey("User_name"))
+    {
+        <div class="alert alert-success">
+            Welcome @TempData["User_name"], Let's get Blogg'in
+        </div>
+    }
+</div>

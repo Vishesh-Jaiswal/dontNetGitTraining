@@ -1,0 +1,14 @@
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\bin\Debug\net6.0\SolidApp.exe
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\bin\Debug\net6.0\SolidApp.deps.json
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\bin\Debug\net6.0\SolidApp.runtimeconfig.json
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\bin\Debug\net6.0\SolidApp.dll
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\bin\Debug\net6.0\SolidApp.pdb
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\obj\Debug\net6.0\SolidApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\obj\Debug\net6.0\SolidApp.AssemblyInfoInputs.cache
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\obj\Debug\net6.0\SolidApp.AssemblyInfo.cs
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\obj\Debug\net6.0\SolidApp.csproj.CoreCompileInputs.cache
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\obj\Debug\net6.0\SolidApp.dll
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\obj\Debug\net6.0\refint\SolidApp.dll
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\obj\Debug\net6.0\SolidApp.pdb
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\obj\Debug\net6.0\SolidApp.genruntimeconfig.cache
+D:\Hexaware FSD\ShoppingAppFiles\ShoppingSolution\SolidApp\obj\Debug\net6.0\ref\SolidApp.dll
