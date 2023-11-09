@@ -41,6 +41,7 @@ namespace ShoppingApp
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<ICartService, CartService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

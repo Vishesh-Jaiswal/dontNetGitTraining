@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ShoppingApp.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,7 @@ namespace ShoppingApp.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,7 +31,8 @@ namespace ShoppingApp.Migrations
                 {
                     Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Key = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,15 +46,14 @@ namespace ShoppingApp.Migrations
                     CartNumber = table.Column<int>(type: "int", nullable: false),
                     Product_Id = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CartItems", x => new { x.CartNumber, x.Product_Id });
                     table.ForeignKey(
-                        name: "FK_CartItems_Products_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_CartItems_Products_Product_Id",
+                        column: x => x.Product_Id,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -79,9 +79,9 @@ namespace ShoppingApp.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItems_ProductId",
+                name: "IX_CartItems_Product_Id",
                 table: "CartItems",
-                column: "ProductId");
+                column: "Product_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_Username",
