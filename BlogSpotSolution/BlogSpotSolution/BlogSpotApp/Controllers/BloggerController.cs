@@ -31,7 +31,7 @@ namespace BlogSpotApp.Controllers
             }
             catch (DbUpdateException exp)
             {
-                message = "Duplicate username prob";
+                message = "This Email already exists";
             }
             catch (Exception)
             {

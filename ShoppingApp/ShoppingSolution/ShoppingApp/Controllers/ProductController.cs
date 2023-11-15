@@ -11,10 +11,12 @@ namespace ShoppingApp.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+        private readonly ILogger<ProductController> _logger;
         private readonly IProductService _productService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService,ILogger<ProductController> logger)
         {
+            _logger = logger;
             _productService = productService;
         }
         [Authorize]
@@ -25,10 +27,12 @@ namespace ShoppingApp.Controllers
             try
             {
                 var result = _productService.GetProducts();
+                _logger.LogInformation("Product Listed");
                 return Ok(result);
             }
             catch (NoProductsAvailableException e)
             {
+                _logger.LogError("No product listed");
                 errorMessage = e.Message;
             }
             return BadRequest(errorMessage);

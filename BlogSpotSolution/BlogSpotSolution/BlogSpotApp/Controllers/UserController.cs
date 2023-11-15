@@ -2,6 +2,7 @@
 using BlogSpotApp.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace BlogSpotApp.Controllers
 {
@@ -13,6 +14,7 @@ namespace BlogSpotApp.Controllers
         {
             _userService = userService;
         }
+
         public IActionResult Register()
         {
             return View();
@@ -20,27 +22,30 @@ namespace BlogSpotApp.Controllers
         [HttpPost]
         public IActionResult Register(UserViewModel viewModel)
         {
-            try
-            {
-                var user = _userService.Register(viewModel);
-                if (user != null)
+           
+                try
                 {
-                    return RedirectToAction("Index", "Home");
+                    var user = _userService.Register(viewModel);
+                    if (user != null)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-            }
-            catch (DbUpdateException exp)
-            {
-                ViewBag.Message = "User Email already exits";
-            }
-            catch (Exception)
-            {
-                ViewBag.Message = "Invalid data. Coudld not register";
-                throw;
-            }
-            //ViewData["Message"] = "Invalid data. Coudld not register";
-
+                catch (DbUpdateException exp)
+                {
+                    ViewBag.Message = "User Email already exits";
+                }
+                catch (Exception)
+                {
+                    ViewBag.Message = "Invalid data. Coudld not register";
+                    throw;
+                }
+            
             return View();
         }
+
+  
+
         public IActionResult Login()
         {
             return View();
@@ -51,7 +56,6 @@ namespace BlogSpotApp.Controllers
             var result = _userService.Login(userDTO);
             if (result != null)
             {
-                TempData.Add("User Email", userDTO.User_name);
                 return RedirectToAction("Index", "Home");
             }
             ViewData["Message"] = "Invalid User Email or password";

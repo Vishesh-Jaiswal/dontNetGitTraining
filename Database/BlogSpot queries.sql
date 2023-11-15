@@ -1,8 +1,15 @@
-select * from users
-
+--Delete----------------
 delete from Users
 
+delete from Products
+
 delete from Carts
+
+delete from CartItems
+
+--select------------------
+
+select * from users
 
 select * from Products
 

@@ -4,6 +4,8 @@ namespace BlogSpotApp.Models.DTOs
     public class UserDTO
     {
         [Required(ErrorMessage = "User Email cannot be empty")]
+        [EmailAddress(ErrorMessage = "Invalid email format")]
+        [DataType(DataType.EmailAddress)]
         public string User_email { get; set; }
 
         [Required(ErrorMessage = "Username cannot be empty")]
