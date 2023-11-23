@@ -62,6 +62,31 @@ namespace ShoppingApp.Migrations
                     b.ToTable("CartItems");
                 });
 
+            modelBuilder.Entity("ShoppingApp.Models.Order", b =>
+                {
+                    b.Property<int>("OrderNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderNumber"), 1L, 1);
+
+                    b.Property<float>("OrderAmount")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("cartNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderNumber");
+
+                    b.HasIndex("cartNumber");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("ShoppingApp.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -130,6 +155,17 @@ namespace ShoppingApp.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ShoppingApp.Models.Order", b =>
+                {
+                    b.HasOne("ShoppingApp.Models.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("cartNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
                 });
 
             modelBuilder.Entity("ShoppingApp.Models.Product", b =>

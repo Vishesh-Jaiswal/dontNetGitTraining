@@ -1,0 +1,16 @@
+.second{
+    color: red;
+}
+
+#header{
+    position: relative;
+    color: blue;
+    background-color: aquamarine;
+    width: fit-content;
+    left: 35%;
+}
+
+#para{
+    text-transform: capitalize;
+    background-color: aquamarine;
+}

@@ -22,9 +22,88 @@ namespace BlogSpotApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("BlogSpotApp.Models.Blog", b =>
+                {
+                    b.Property<int>("BlogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogId"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("BlogId");
+
+                    b.HasIndex("UserEmail");
+
+                    b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("BlogSpotApp.Models.Comment", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentId"), 1L, 1);
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CommentedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CommentId");
+
+                    b.HasIndex("BlogId");
+
+                    b.HasIndex("UserEmail");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("BlogSpotApp.Models.Follow", b =>
+                {
+                    b.Property<string>("FollowerEmail")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FollowedEmail")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("FollowId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FollowerEmail", "FollowedEmail");
+
+                    b.HasIndex("FollowedEmail");
+
+                    b.ToTable("Follows");
+                });
+
             modelBuilder.Entity("BlogSpotApp.Models.User", b =>
                 {
-                    b.Property<string>("User_email")
+                    b.Property<string>("UserEmail")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<byte[]>("Key")
@@ -36,7 +115,6 @@ namespace BlogSpotApp.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ProfilePicture")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RegistrationDate")
@@ -46,13 +124,78 @@ namespace BlogSpotApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("User_name")
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("User_email");
+                    b.HasKey("UserEmail");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("BlogSpotApp.Models.Blog", b =>
+                {
+                    b.HasOne("BlogSpotApp.Models.User", "Author")
+                        .WithMany("Blogs")
+                        .HasForeignKey("UserEmail")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("BlogSpotApp.Models.Comment", b =>
+                {
+                    b.HasOne("BlogSpotApp.Models.Blog", "BlogPost")
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BlogSpotApp.Models.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserEmail")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("BlogPost");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BlogSpotApp.Models.Follow", b =>
+                {
+                    b.HasOne("BlogSpotApp.Models.User", "Followed")
+                        .WithMany("Follows")
+                        .HasForeignKey("FollowedEmail")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BlogSpotApp.Models.User", "Follower")
+                        .WithMany("Followers")
+                        .HasForeignKey("FollowerEmail")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Followed");
+
+                    b.Navigation("Follower");
+                });
+
+            modelBuilder.Entity("BlogSpotApp.Models.Blog", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("BlogSpotApp.Models.User", b =>
+                {
+                    b.Navigation("Blogs");
+
+                    b.Navigation("Comments");
+
+                    b.Navigation("Followers");
+
+                    b.Navigation("Follows");
                 });
 #pragma warning restore 612, 618
         }

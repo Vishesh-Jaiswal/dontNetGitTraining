@@ -8,11 +8,16 @@ delete from Carts
 delete from CartItems
 
 --select------------------
-
-select * from users
+sp_help Users
+sp_help Blogs
+sp_help CartItems
+select * from Blogs
+select * from users order by RegistrationDate desc
+select * from Comments
+select * from Follows
 
 select * from Products
-
+select * from Orders
 select * from Carts
 
 select * from CartItems

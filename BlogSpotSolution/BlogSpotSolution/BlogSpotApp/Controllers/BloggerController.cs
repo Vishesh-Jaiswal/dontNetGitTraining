@@ -16,7 +16,14 @@ namespace BlogSpotApp.Controllers
         {
             _userService = userService;
         }
-        [HttpPost("register")]
+
+//------------------------------------------REGISTER USER----------------------------------
+        /// <summary>
+        /// API for User Resgistration
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
+        [HttpPost("Register")]
         public ActionResult Register(UserDTO viewModel)
         {
 
@@ -40,7 +47,13 @@ namespace BlogSpotApp.Controllers
             return BadRequest(message);
         }
 
-        [HttpPost("login")]
+//------------------------------------------Login USER----------------------------------
+        /// <summary>
+        /// API for User Login
+        /// </summary>
+        /// <param name="userDTO">UserDTO</param>
+        /// <returns></returns>
+        [HttpPost("Login")]
         public ActionResult Login(UserDTO userDTO)
         {
             var user = _userService.Login(userDTO);

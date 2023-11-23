@@ -9,14 +9,16 @@ namespace BlogSpotApp.Services
     public class UserService:IUserService
     {
         private readonly IRepository<string, User> _repository;
+        private readonly ITokenService _tokenService;
 
-        public UserService(IRepository<string, User> repository)
+        public UserService(IRepository<string, User> repository, ITokenService tokenService)
         {
             _repository = repository;
+            _tokenService = tokenService;
         }
         public UserDTO Login(UserDTO userDTO)
         {
-            var user = _repository.GetById(userDTO.User_email);
+            var user = _repository.GetById(userDTO.UserEmail);
             if (user != null)
             {
                 HMACSHA512 hmac = new HMACSHA512(user.Key);
@@ -26,6 +28,7 @@ namespace BlogSpotApp.Services
                     if (user.Password[i] != userpass[i])
                         return null;
                 }
+                userDTO.Token = _tokenService.GetToken(userDTO);
                 userDTO.Password = "";
                 return userDTO;
             }
@@ -37,8 +40,8 @@ namespace BlogSpotApp.Services
             HMACSHA512 hmac = new HMACSHA512();
             User user = new User()
             {
-                User_email = userDTO.User_email,
-                User_name = userDTO.User_name,
+                UserEmail = userDTO.UserEmail,
+                UserName = userDTO.UserName,
                 Password = hmac.ComputeHash(Encoding.UTF8.GetBytes(userDTO.Password)),
                 Key = hmac.Key,
                 Role = userDTO.Role,

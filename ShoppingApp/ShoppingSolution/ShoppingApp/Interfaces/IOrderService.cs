@@ -1,9 +1,10 @@
-﻿using ShoppingApp.Models.DTOs;
+﻿using ShoppingApp.Models;
+using ShoppingApp.Models.DTOs;
 
 namespace ShoppingApp.Interfaces
 {
     public interface IOrderService
     {
-        bool PlaceOrder(OrderDTO orderDTO);
+        Order PlaceOrder(Order order);
     }
 }

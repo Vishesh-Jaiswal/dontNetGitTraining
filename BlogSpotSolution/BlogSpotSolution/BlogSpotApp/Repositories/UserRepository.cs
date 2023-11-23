@@ -10,15 +10,16 @@ namespace BlogSpotApp.Repositories
     {
         private readonly BlogSpotContext _context;
 
+
         public UserRepository(BlogSpotContext context)
         {
             _context = context;
         }
-        public User Add(User entity)
+        public User Add(User user)
         {
-            _context.Users.Add(entity);
+            _context.Users.Add(user);
             _context.SaveChanges();
-            return entity;
+            return user;
         }
 
         public User Delete(string key)
@@ -42,13 +43,13 @@ namespace BlogSpotApp.Repositories
 
         public User GetById(string key)
         {
-            var user = _context.Users.SingleOrDefault(u => u.User_email == key);
+            var user = _context.Users.SingleOrDefault(u => u.UserEmail == key);
             return user;
         }
 
         public User Update(User entity)
         {
-            var user = GetById(entity.User_name);
+            var user = GetById(entity.UserName);
             if (user != null)
             {
                 _context.Entry<User>(user).State = EntityState.Modified;

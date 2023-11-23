@@ -1,0 +1,7 @@
+.product{
+    position: relative;
+    background-color: lightgreen;
+    width: 20%;
+    left: 40%;
+    color: green;
+}
